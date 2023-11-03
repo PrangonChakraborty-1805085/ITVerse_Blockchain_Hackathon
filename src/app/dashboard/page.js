@@ -13,9 +13,6 @@ import { ethers } from "ethers";
 import * as Contracts from "../../constant";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import {
-  resetCurrentCommunityScanning,
-} from "../../redux/features/auth-slice";
 
 const style = {
   position: "absolute",
@@ -40,7 +37,6 @@ export default function page() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(resetCurrentCommunityScanning());
     if (contract == null) {
       connectContract();
     } else {

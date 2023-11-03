@@ -11,9 +11,11 @@ export default function Community({ title, description, address }) {
     e.preventDefault();
     console.log("address of community ", address);
     const routeParam = "" + address;
-    dispatch(setCurrentCommunityScanning(title));
+    setTimeout(() => {
+      dispatch(setCurrentCommunityScanning(title));
+    }, 2000);
     //enter a new route for this community
-    router.push(`/communities/` + routeParam);
+    router.push(`/communities/random?title=${title}&address=${routeParam}`);
   };
   return (
     <div class="p-4 lg:w-1/3">

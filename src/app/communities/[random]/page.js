@@ -13,6 +13,8 @@ import { Web3Storage } from "web3.storage";
 import { useParams } from "next/navigation";
 
 import { useSelector } from "react-redux";
+import PendingPublication from "./PendingPublication";
+import BuyCommunityToken from "./BuyCommunityToken";
 
 const style = {
   position: "absolute",
@@ -94,6 +96,8 @@ export default function page() {
   return (
     <section class="text-gray-600 body-font">
       <Header />
+      <BuyCommunityToken />
+      <PendingPublication />
       <Modal
         open={open}
         onClose={handleClose}
