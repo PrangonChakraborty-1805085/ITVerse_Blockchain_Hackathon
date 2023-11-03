@@ -64,6 +64,7 @@ export default function page() {
             <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
               Create
             </button>
+            <p className="text-sm p-2 m-2">Current Community Creation Cost : 3 ABX Tokens</p>
             <p class="text-xs text-gray-500 mt-3"></p>
           </div>
         </Box>
