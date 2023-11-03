@@ -26,6 +26,18 @@ export default function BuyCommunityToken({ contract }) {
   let communityAddress = searchparams.get("address");
   const [community, setCommunity] = useState(null);
 
+
+  useEffect(() => {
+    contract.getCommunities().then((value) => {
+      let com = value.filter((comm) => {
+        return comm.nativeToken == communityAddress;
+      });
+      setCommunity(com[0]);
+      setAbxValue(com[0].exchangeRate);
+    
+    });
+  },[]);
+
   const handleClose = async () => {
     setOpen(false);
   };
@@ -39,11 +51,9 @@ export default function BuyCommunityToken({ contract }) {
             method: "eth_requestAccounts",
           })
           .then((accounts) => {
-            contract
-              .getBalanceNativeToken(communityAddress, accounts[0])
-              .then((value) => {
-                setTokenBal(parseInt(value._hex) / 1000000000000000000);
-              });
+            contract.getBalanceNativeToken( communityAddress ,accounts[0]).then((value) => {
+              setTokenBal(parseInt(value._hex / 1000000000000000000));
+            });
           });
       } else {
         console.log("ethereum object does not exist");
@@ -66,6 +76,7 @@ export default function BuyCommunityToken({ contract }) {
     );
     setOpen(false);
   };
+  connectContract();
   return (
     <div className="w-full h-20 flex flex-col items-center justify-center">
       <h2 className="font-bold mr-40">

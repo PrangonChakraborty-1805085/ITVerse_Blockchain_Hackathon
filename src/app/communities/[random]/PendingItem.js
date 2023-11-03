@@ -4,7 +4,11 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import Timer from "./Timer";
 
-export default function PendingItem() {
+import { Web3Storage } from "web3.storage";
+import { ethers } from "ethers";
+import * as Contracts from "../../../constant";
+
+export default function PendingItem({ art }) {
   const [upcount, setUpcount] = useState(0);
   const [downCount, setDownCount] = useState(0);
   const handleThumbsUp = (e) => {
@@ -36,21 +40,32 @@ export default function PendingItem() {
       }
     }
   };
+  let [img, setImg] = React.useState("");
+  const token = Contracts.WEB3_TOKEN;
+  const client = new Web3Storage({ token: token });
+  React.useEffect(() => {
+    client.get(art.ipfsCID).then((value) => {
+      value.files().then((files) => {
+        console.log(files[0]);
+        let url = URL.createObjectURL(files[0]);
+        setImg(url);
+      });
+      //let url = URL.createObjectURL(imgFile);
+      //setImg(url);
+    });
+  }, []);
   return (
     <div class="xl:w-1/3 md:w-1/2 p-4 cursor-pointer">
       <div class="bg-gray-100 p-6 rounded-lg">
         <img
           class="h-40 rounded w-full object-cover object-center mb-6"
-          src="https://dummyimage.com/720x400"
+          src={img}
           alt="content"
         />
         <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
-          Chichen Itza
+          {art.title}
         </h2>
-        <p class="leading-relaxed text-base">
-          Fingerstache flexitarian street art 8-bit waistcoat. Distillery
-          hexagon disrupt edison bulbche.
-        </p>
+        <p class="leading-relaxed text-base">{art.description}</p>
         <Timer />
         <div class="flex flex-row items-center justify-evenly p-4">
           <ThumbUpIcon onClick={handleThumbsUp} />

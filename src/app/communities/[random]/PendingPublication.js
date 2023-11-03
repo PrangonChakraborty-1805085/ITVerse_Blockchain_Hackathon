@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
-export default function PendingPublication() {
+export default function PendingPublication({contract}) {
   const number = [1, 3, 4, 5, 6];
   //   const currCommunity = useSelector(
   //     (state) => state.persistedAuthReducer.value.currentCommunityScanning
@@ -16,9 +16,20 @@ export default function PendingPublication() {
   const searchparams = useSearchParams();
   const title = searchparams.get("title");
   const address = searchparams.get("address");
- 
+  const [arts, setArts] = useState([]);
+
+  // useEffect(() => {
+  //   console.log("address", address);
+  //   xcontract.getArtSubmissionsPending(address).then((value) => {
+  //     setArts(value);
+  //   }).catch((err) => {
+  //     console.log(err);
+  //   })
+  // }, [arts]);
 
   
+  let tempArts = [{ipfsCID: "bafybeibcec2crelvvhq4tvz57ne7gwvhyrpgpth35x2t7y2cqe3h7wnc2q"}];
+  //setArts(tempArts);
 
   return (
     <section class="text-gray-600 body-font">
@@ -33,8 +44,8 @@ export default function PendingPublication() {
           </div>
         </div>
         <div class="flex flex-wrap -m-4">
-          {number.map((num) => (
-            <PendingItem key={num} />
+          {tempArts.map((art, i) => (
+            <PendingItem key={i} art={art}/>
           ))}
         </div>
       </div>
