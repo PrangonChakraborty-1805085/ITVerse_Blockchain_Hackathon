@@ -21,6 +21,7 @@ export default function NFT_Item() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   return (
     <div class="xl:w-1/4 md:w-1/2 p-4">
       <Modal
@@ -32,7 +33,7 @@ export default function NFT_Item() {
         <Box sx={style}>
           <div class=" bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
             <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">
-              Create a new Community
+              nothing
             </h2>
             <div class="relative mb-4">
               <label for="text" class="leading-7 text-sm text-gray-600">
