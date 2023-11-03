@@ -82,6 +82,7 @@ export default function Header() {
     const transaction = await contract.buyABX({
       value: ethers.utils.parseEther(ether.toString()),
     });
+    setOpen(false);
   };
 
   return (

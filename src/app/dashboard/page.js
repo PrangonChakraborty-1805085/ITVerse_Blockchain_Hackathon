@@ -8,6 +8,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Header from "../../components/header";
+import { create } from "@mui/material/styles/createTransitions";
+import { ethers } from "ethers";
+import * as Contracts from "../../constant";
 
 const style = {
   position: "absolute",
@@ -21,11 +24,39 @@ const style = {
   p: 4,
 };
 
+
+
 export default function page() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const number = [1, 3, 4, 5, 6];
+  
+
+
+  async function createCommunity() {
+    
+    const { ethereum } = window;
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      let Contract = new ethers.Contract(
+        Contracts.contractAddress,
+        Contracts.abi,
+        signer
+      );
+      //console.log(document.getElementById("text").value);
+      try {
+        let res = await Contract.createCommunity(document.getElementById("text").value, document.getElementById("message").value);
+      } catch (error) {
+        console.log(error);
+      }
+      setOpen(false);
+      //console.log(res);
+    }
+  }
+
+
   return (
     <section class="text-gray-600 body-font">
       <Header />
@@ -36,10 +67,12 @@ export default function page() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+        <form>
           <div class=" bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
             <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">
               Create a new Community
             </h2>
+            
             <div class="relative mb-4">
               <label for="text" class="leading-7 text-sm text-gray-600">
                 Title
@@ -47,7 +80,8 @@ export default function page() {
               <input
                 type="text"
                 id="text"
-                name="text"
+                name="text" 
+                required
                 class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
@@ -58,15 +92,20 @@ export default function page() {
               <textarea
                 id="message"
                 name="message"
+                required
                 class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
               ></textarea>
             </div>
-            <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            
+            <button onClick={createCommunity}
+              class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
               Create
             </button>
-            <p className="text-sm p-2 m-2">Current Community Creation Cost : 3 ABX Tokens</p>
+            
+            <p className="text-sm p-2 m-2">Current Community Creation Cost : 5 ABX Tokens</p>
             <p class="text-xs text-gray-500 mt-3"></p>
           </div>
+          </form>
         </Box>
       </Modal>
       <div className="flex items-center justify-between border shadow-sm">
