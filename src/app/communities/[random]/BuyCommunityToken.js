@@ -16,7 +16,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-export default function BuyCommunityToken({contract}) {
+export default function BuyCommunityToken({ contract }) {
   const [open, setOpen] = useState(false);
   const [tokenAmount, setTokenAmount] = useState(0);
   const [totalABXNeeded, setTotalABXNeeded] = useState(0);
@@ -26,21 +26,10 @@ export default function BuyCommunityToken({contract}) {
   let communityAddress = searchparams.get("address");
   const [community, setCommunity] = useState(null);
 
-
-  useEffect(() => {
-    contract.findCommunity(communityAddress).then((value) => {
-      setCommunity(value);
-      setAbxValue(parseInt(value.exchangerate._hex) / 1000000000000000000);
-    });
-  },[]);
-
   const handleClose = async () => {
     setOpen(false);
   };
-  const currentCommunity = useSelector(
-    (state) => state.persistedAuthReducer.value.currentCommunityScanning
-  );
-
+  const currentCommunity = searchparams.get("title");
   function connectContract() {
     try {
       const { ethereum } = window;
@@ -50,9 +39,11 @@ export default function BuyCommunityToken({contract}) {
             method: "eth_requestAccounts",
           })
           .then((accounts) => {
-            contract.getBalanceNativeToken( communityAddress ,accounts[0]).then((value) => {
-              setTokenBal(parseInt(value._hex) / 1000000000000000000);
-            });
+            contract
+              .getBalanceNativeToken(communityAddress, accounts[0])
+              .then((value) => {
+                setTokenBal(parseInt(value._hex) / 1000000000000000000);
+              });
           });
       } else {
         console.log("ethereum object does not exist");
@@ -62,20 +53,23 @@ export default function BuyCommunityToken({contract}) {
     }
   }
 
-//   const [currentComm, setCurrentComm] = useState(currentCommunity);
+  //   const [currentComm, setCurrentComm] = useState(currentCommunity);
 
   const handleBuyToken = async (e) => {
     e.preventDefault();
     // const transaction = await contract.buyABX({
     //   value: ethers.utils.parseEther(ether.toString()),
     // });
-    const res = await contract.purchaseNativeTokens(communityAddress,tokenAmount);
+    const res = await contract.purchaseNativeTokens(
+      communityAddress,
+      tokenAmount
+    );
     setOpen(false);
   };
   return (
     <div className="w-full h-20 flex flex-col items-center justify-center">
       <h2 className="font-bold mr-40">
-         Balance: {tokenBal} {currentCommunity} Tokens
+        Balance: {tokenBal} {currentCommunity} Tokens
       </h2>
       <button
         onClick={() => setOpen(true)}

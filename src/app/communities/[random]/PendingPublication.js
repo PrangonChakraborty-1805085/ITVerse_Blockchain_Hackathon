@@ -27,8 +27,8 @@ export default function PendingPublication() {
           <div class=" w-full mb-6 lg:mb-0">
             <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
               Pending Publications for {title}
-
             </h1>
+            <h4 class="text-black p-2">Give Upvote or Downvote within deadline</h4>
             <div class="h-1 w-20 bg-indigo-500 rounded"></div>
           </div>
         </div>

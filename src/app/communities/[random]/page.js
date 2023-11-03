@@ -28,11 +28,10 @@ const style = {
   p: 4,
 };
 
-
-
 export default function page() {
-  const API_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY1NDExMURFMTY3OUFhN0M5YmQxMkIyNzg2MDFlYTA5OTJBNGFFZDEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTg5NTU4MDc2MjEsIm5hbWUiOiJwZGYtdGVzdCJ9.7_9LB5P7f04RVufQ55ZWhOBZCufbXJr6xB_P0zDzMDY";
-  const client = new Web3Storage({ token: API_TOKEN })
+  const API_TOKEN =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY1NDExMURFMTY3OUFhN0M5YmQxMkIyNzg2MDFlYTA5OTJBNGFFZDEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTg5NTU4MDc2MjEsIm5hbWUiOiJwZGYtdGVzdCJ9.7_9LB5P7f04RVufQ55ZWhOBZCufbXJr6xB_P0zDzMDY";
+  const client = new Web3Storage({ token: API_TOKEN });
   const number = [1, 3, 4, 5, 6];
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -42,7 +41,7 @@ export default function page() {
   let communityAddress = searchparams.get("address");
 
   useEffect(() => {
-    if(contract == null){
+    if (contract == null) {
       connectContract();
     }
   }, [contract]);
@@ -61,11 +60,7 @@ export default function page() {
     }
   }
 
-
-
-  const currentCommunity = useSelector(
-    (state) => state.persistedAuthReducer.value.currentCommunityScanning
-  );
+  const currentCommunity = searchparams.get("title");
 
   const [currentComm, setCurrentComm] = useState(currentCommunity);
 
@@ -74,30 +69,35 @@ export default function page() {
     e.preventDefault();
     setFile(e.target.files[0]);
   };
-  const handlePublish = async(e) => {
+  const handlePublish = async (e) => {
     e.preventDefault();
     const cid = await client.put([file]);
     console.log("uploaded file :" + cid);
-    contract.submitArtForPublication(communityAddress, document.getElementById("text").value, document.getElementById("message").value, cid);
+    contract.submitArtForPublication(
+      communityAddress,
+      document.getElementById("text").value,
+      document.getElementById("message").value,
+      cid
+    );
   };
 
   const showFileFromIpfs = async (cid) => {
     const data = await client.get(cid);
     const file = data.files();
-  }
+  };
 
-  if(!contract){
+  if (!contract) {
     return <div>loading...</div>;
   }
 
   async function buyNativeToken() {
-    const res = await contract.purchaseNativeToken(communityAddress.random, );
+    const res = await contract.purchaseNativeToken(communityAddress.random);
   }
 
   return (
     <section class="text-gray-600 body-font">
       <Header />
-      <BuyCommunityToken contract={contract}/>
+      <BuyCommunityToken contract={contract} />
       <PendingPublication />
       <Modal
         open={open}
@@ -137,8 +137,10 @@ export default function page() {
               </label>
               <input type="file" onChange={onFileChange} />
             </div>
-            <button onClick={handlePublish}
-            class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            <button
+              onClick={handlePublish}
+              class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            >
               Publish
             </button>
             <p className="text-sm p-2 m-2">
