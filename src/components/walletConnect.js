@@ -37,7 +37,7 @@ export default function walletConnect() {
           console.log("current account is : ",accounts[0]);
           //storing the account in session storage
           //pushing to new page
-          router.push("/");
+          router.push("/dashboard");
         }
       }
     } catch (error) {
