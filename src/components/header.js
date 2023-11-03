@@ -125,7 +125,7 @@ export default function Header() {
         <h2 className="font-bold mr-5">Balance: {abxBal} ABX Tokens</h2>
         <button
           onClick={() => setOpen(true)}
-          className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+          className="inline-flex items-center bg-gray-800 border-0  p-3 text-white focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
         >
           Buy ABX
         </button>
