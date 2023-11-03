@@ -28,9 +28,13 @@ export default function BuyCommunityToken({contract}) {
 
 
   useEffect(() => {
-    contract.findCommunity(communityAddress).then((value) => {
-      setCommunity(value);
-      setAbxValue(parseInt(value.exchangerate._hex) / 1000000000000000000);
+    contract.getCommunities().then((value) => {
+      let com = value.filter((comm) => {
+        return comm.nativeToken == communityAddress;
+      });
+      setCommunity(com[0]);
+      setAbxValue(com[0].exchangeRate);
+    
     });
   },[]);
 
@@ -51,7 +55,7 @@ export default function BuyCommunityToken({contract}) {
           })
           .then((accounts) => {
             contract.getBalanceNativeToken( communityAddress ,accounts[0]).then((value) => {
-              setTokenBal(parseInt(value._hex) / 1000000000000000000);
+              setTokenBal(parseInt(value._hex));
             });
           });
       } else {
@@ -72,6 +76,7 @@ export default function BuyCommunityToken({contract}) {
     const res = await contract.purchaseNativeTokens(communityAddress,tokenAmount);
     setOpen(false);
   };
+  connectContract();
   return (
     <div className="w-full h-20 flex flex-col items-center justify-center">
       <h2 className="font-bold mr-40">
