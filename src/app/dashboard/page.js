@@ -11,8 +11,11 @@ import Header from "../../components/header";
 import { create } from "@mui/material/styles/createTransitions";
 import { ethers } from "ethers";
 import * as Contracts from "../../constant";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
+import {
+  resetCurrentCommunityScanning,
+} from "../../redux/features/auth-slice";
 
 const style = {
   position: "absolute",
@@ -34,7 +37,10 @@ export default function page() {
   let [communities, setCommunities] = useState([]);
   const router = useRouter();
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(resetCurrentCommunityScanning());
     if (contract == null) {
       connectContract();
     } else {
@@ -199,6 +205,7 @@ export default function page() {
               key={i}
               title={community.title}
               description={community.description}
+              address={community.nativeToken}
             />
           ))}
         </div>
