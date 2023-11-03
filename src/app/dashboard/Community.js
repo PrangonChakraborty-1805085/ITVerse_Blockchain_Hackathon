@@ -2,7 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-export default function Community() {
+export default function Community({title, description}) {
   const router = useRouter();
   const handleCommunityEnter = (e) => {
     e.preventDefault();
@@ -13,12 +13,10 @@ export default function Community() {
     <div class="p-4 lg:w-1/3">
       <div class=" shadow-md h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
         <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
-          Portrait Enthusiasts Community
+          {title}
         </h1>
         <p class="leading-relaxed mb-3">
-          Welcome to the Portrait Enthusiasts Community, where artists and
-          admirers of the human form come together to celebrate the beauty of
-          portraiture.
+          {description}
         </p>
         <a
           onClick={handleCommunityEnter}

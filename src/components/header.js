@@ -5,13 +5,14 @@ import { Box, Modal, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import * as Contracts from "../constant";
 import { ethers } from "ethers";
-import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import {
   setAbxPurchaseRate,
   setAbxBalance,
   setContract,
 } from "../redux/features/auth-slice";
+import { useDispatch } from "react-redux";
+
 export default function Header() {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
@@ -50,13 +51,17 @@ export default function Header() {
           signer
         );
         console.log(Contract);
-        settContract(Contract);
-        // dispatch(setContract(Contract));
+
         Contract.ABX_Price().then((value) => {
-          setEthxValue(parseInt(value._hex) / 1000000000000000000);
-          dispatch(
-            setAbxPurchaseRate(parseInt(value._hex) / 1000000000000000000)
-          );
+          setTimeout(() => {
+            setEthxValue(parseInt(value._hex) / 1000000000000000000);
+            dispatch(
+              setAbxPurchaseRate(parseInt(value._hex) / 1000000000000000000)
+            );
+            settContract(Contract);
+            dispatch(setContract(Contract));
+          }, 3000);
+
         });
         ethereum
           .request({
@@ -65,8 +70,11 @@ export default function Header() {
           .then((accounts) => {
             console.log(accounts[0]);
             Contract.balanceOf(accounts[0]).then((value) => {
-              setAbxBal(parseInt(value._hex));
-              dispatch(setAbxBalance(parseInt(value._hex)));
+              setTimeout(() => {
+                setAbxBal(parseInt(value._hex));
+                dispatch(setAbxBalance(parseInt(value._hex)));
+              }, 3000);
+
             });
           });
       } else {
@@ -86,6 +94,7 @@ export default function Header() {
     const transaction = await contract.buyABX({
       value: ethers.utils.parseEther(ether.toString()),
     });
+    setOpen(false);
   };
 
   return (
