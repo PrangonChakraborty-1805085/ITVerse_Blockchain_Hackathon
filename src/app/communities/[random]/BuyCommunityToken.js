@@ -55,7 +55,7 @@ export default function BuyCommunityToken({contract}) {
           })
           .then((accounts) => {
             contract.getBalanceNativeToken( communityAddress ,accounts[0]).then((value) => {
-              setTokenBal(parseInt(value._hex));
+              setTokenBal(parseInt(value._hex / 1000000000000000000));
             });
           });
       } else {

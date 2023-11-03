@@ -78,7 +78,8 @@ export default function page() {
     e.preventDefault();
     const cid = await client.put([file]);
     console.log("uploaded file :" + cid);
-    contract.submitArtForPublication(communityAddress, document.getElementById("text").value, document.getElementById("message").value, cid);
+    const res = await contract.submitArtForPublication(communityAddress, document.getElementById("text").value, document.getElementById("message").value, cid);
+    setOpen(false);
   };
 
   const showFileFromIpfs = async (cid) => {
@@ -98,7 +99,7 @@ export default function page() {
     <section class="text-gray-600 body-font">
       <Header />
       <BuyCommunityToken contract={contract}/>
-      <PendingPublication />
+      <PendingPublication contract={contract}/>
       <Modal
         open={open}
         onClose={handleClose}
