@@ -7,10 +7,13 @@ import Timer from "./Timer";
 import { Web3Storage } from "web3.storage";
 import { ethers } from "ethers";
 import * as Contracts from "../../../constant";
+import { useSearchParams } from "next/navigation";
 
-export default function PendingItem({ art }) {
+export default function PendingItem({ contract, art }) {
   const [upcount, setUpcount] = useState(0);
   const [downCount, setDownCount] = useState(0);
+  const searchparams = useSearchParams();
+  const communityAddress = searchparams.get("address");
   const handleThumbsUp = (e) => {
     e.preventDefault();
     setUpcount(upcount + 1);
@@ -29,14 +32,27 @@ export default function PendingItem({ art }) {
       e.target.style.color = "rgba(255, 0, 0, 0.9)";
     }
   };
-  const handleVoteSubmit = (e) => {
+  const handleVoteSubmit = async (e) => {
     e.preventDefault();
     if (upcount !== 0 || downCount !== 0) {
       // has submitted either upvote or downvote
       if (upcount % 2 !== 0) {
         //upvote pressed ..send request for upvoting
+        try {
+          const res = contract.upvoteArtProduct(communityAddress, art.creator);
+        } catch (err) {
+          console.log(err);
+          alert("You have already voted for this product");
+        }
+
       } else {
         //downvote pressed ..send request for downvoting
+        try {
+          const res = contract.downvoteArtProduct(communityAddress, art.creator);
+        } catch (err) {
+          console.log(err);
+          alert("You have already voted for this product");
+        }
       }
     }
   };

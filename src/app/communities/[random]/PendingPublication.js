@@ -18,17 +18,17 @@ export default function PendingPublication({contract}) {
   const address = searchparams.get("address");
   const [arts, setArts] = useState([]);
 
-  // useEffect(() => {
-  //   console.log("address", address);
-  //   xcontract.getArtSubmissionsPending(address).then((value) => {
-  //     setArts(value);
-  //   }).catch((err) => {
-  //     console.log(err);
-  //   })
-  // }, [arts]);
+  useEffect(() => {
+    console.log("address", address);
+    contract.getArtSubmissionsPending(address).then((value) => {
+      setArts(value);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, [arts]);
 
   
-  let tempArts = [{ipfsCID: "bafybeibcec2crelvvhq4tvz57ne7gwvhyrpgpth35x2t7y2cqe3h7wnc2q"}];
+  //let tempArts = [{ipfsCID: "bafybeibcec2crelvvhq4tvz57ne7gwvhyrpgpth35x2t7y2cqe3h7wnc2q"}];
   //setArts(tempArts);
 
   return (
@@ -44,8 +44,8 @@ export default function PendingPublication({contract}) {
           </div>
         </div>
         <div class="flex flex-wrap -m-4">
-          {tempArts.map((art, i) => (
-            <PendingItem key={i} art={art}/>
+          {arts.map((art, i) => (
+            <PendingItem key={i} art={art} contract={contract}/>
           ))}
         </div>
       </div>

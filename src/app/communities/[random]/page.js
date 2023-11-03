@@ -1,6 +1,6 @@
 "use client";
 import Header from "../../../components/header";
-import React, { use, useState, useEffect } from "react";
+import React, {  useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -15,6 +15,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import PendingPublication from "./PendingPublication";
 import BuyCommunityToken from "./BuyCommunityToken";
+import { deepCopy } from "ethers/lib/utils";
 
 const style = {
   position: "absolute",
@@ -84,7 +85,12 @@ export default function page() {
       communityAddress,
       document.getElementById("text").value,
       document.getElementById("message").value,
-      cid
+      cid,
+      true,
+      document.getElementById("number2").value,
+      document.getElementById("number3").value,
+      document.getElementById("number4").value,
+      document.getElementById("number5").value
     );
     setOpen(false);
   };
@@ -98,14 +104,14 @@ export default function page() {
       communityAddress,
       document.getElementById("text").value,
       document.getElementById("message").value,
-      cid
+      cid,
+      false,
+      0,
+      0,
+      0,
+      document.getElementById("number6").value
     );
-    setOpen2(false);
-  };
-
-  const showFileFromIpfs = async (cid) => {
-    const data = await client.get(cid);
-    const file = data.files();
+    setopen2(false);
   };
 
   if (!contract) {
@@ -281,6 +287,17 @@ export default function page() {
                 name="message"
                 class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
               ></textarea>
+            </div>
+            <div class="relative">
+              <label for="text" class="leading-7 text-sm text-gray-600">
+                Price
+              </label>
+              <input
+                type="number"
+                id="number6"
+                name="number5"
+                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
             </div>
             <div class="relative mb-2">
               <label for="text" class="leading-7 text-sm text-gray-600">
