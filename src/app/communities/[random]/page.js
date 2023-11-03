@@ -12,6 +12,8 @@ import * as Contracts from "../../../constant";
 import { Web3Storage } from "web3.storage";
 import { useParams } from "next/navigation";
 
+import { useSelector } from "react-redux";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -56,6 +58,12 @@ export default function page() {
     }
   }
 
+
+  const currentCommunity = useSelector(
+    (state) => state.persistedAuthReducer.value.currentCommunityScanning
+  );
+
+  const [currentComm, setCurrentComm] = useState(currentCommunity);
 
   const [file, setFile] = useState(null);
   const onFileChange = (e) => {
@@ -134,7 +142,7 @@ export default function page() {
         <div class="flex flex-wrap w-full mb-20">
           <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
             <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
-              Notable Collections
+              Notable Collections of {currentComm}
             </h1>
             <div class="h-1 w-20 bg-indigo-500 rounded"></div>
             <button

@@ -8,6 +8,7 @@ const initialState = {
     abxPurchaseRate: 0,
     abxBalance: 0,
     contract: null,
+    currentCommunityScanning: "",
   },
 };
 
@@ -54,6 +55,22 @@ export const auth = createSlice({
         },
       };
     },
+    setCurrentCommunityScanning: (state, action) => {
+      return {
+        value: {
+          ...state.value,
+          currentCommunityScanning: action.payload,
+        },
+      };
+    },
+    resetCurrentCommunityScanning: (state, action) => {
+      return {
+        value: {
+          ...state.value,
+          currentCommunityScanning: "",
+        },
+      };
+    },
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
     // extraReducers: {
     //   [HYDRATE]: (state, action) => {
@@ -72,6 +89,8 @@ export const {
   setAbxPurchaseRate,
   setAbxBalance,
   setContract,
+  setCurrentCommunityScanning,
+  resetCurrentCommunityScanning,
 } = auth.actions;
 
 export default auth.reducer;

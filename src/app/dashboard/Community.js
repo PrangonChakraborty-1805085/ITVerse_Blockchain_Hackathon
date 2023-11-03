@@ -1,13 +1,19 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setCurrentCommunityScanning } from "../../redux/features/auth-slice";
 
-export default function Community({title, description}) {
+export default function Community({ title, description, address }) {
   const router = useRouter();
+  const dispatch = useDispatch();
   const handleCommunityEnter = (e) => {
     e.preventDefault();
+    console.log("address of community ", address);
+    const routeParam = "" + address;
+    dispatch(setCurrentCommunityScanning(title));
     //enter a new route for this community
-    router.push(`/communities/` + "random");
+    router.push(`/communities/` + routeParam);
   };
   return (
     <div class="p-4 lg:w-1/3">
@@ -15,9 +21,7 @@ export default function Community({title, description}) {
         <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
           {title}
         </h1>
-        <p class="leading-relaxed mb-3">
-          {description}
-        </p>
+        <p class="leading-relaxed mb-3">{description}</p>
         <a
           onClick={handleCommunityEnter}
           class="text-indigo-500 inline-flex items-center cursor-pointer"
