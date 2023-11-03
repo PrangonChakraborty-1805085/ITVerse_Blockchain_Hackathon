@@ -14,6 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Header />
         <ReduxConnector Children={children} />
       </body>
     </html>
