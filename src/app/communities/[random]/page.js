@@ -28,21 +28,25 @@ const style = {
   p: 4,
 };
 
-
-
 export default function page() {
-  const API_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY1NDExMURFMTY3OUFhN0M5YmQxMkIyNzg2MDFlYTA5OTJBNGFFZDEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTg5NTU4MDc2MjEsIm5hbWUiOiJwZGYtdGVzdCJ9.7_9LB5P7f04RVufQ55ZWhOBZCufbXJr6xB_P0zDzMDY";
-  const client = new Web3Storage({ token: API_TOKEN })
+  const API_TOKEN =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY1NDExMURFMTY3OUFhN0M5YmQxMkIyNzg2MDFlYTA5OTJBNGFFZDEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTg5NTU4MDc2MjEsIm5hbWUiOiJwZGYtdGVzdCJ9.7_9LB5P7f04RVufQ55ZWhOBZCufbXJr6xB_P0zDzMDY";
+  const client = new Web3Storage({ token: API_TOKEN });
   const number = [1, 3, 4, 5, 6];
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [open2, setopen2] = useState(false);
+  const handleOpen2 = () => setopen2(true);
+  const handleClose2 = () => setopen2(false);
+
   let [contract, setContract] = useState(null);
   const searchparams = useSearchParams();
   let communityAddress = searchparams.get("address");
 
   useEffect(() => {
-    if(contract == null){
+    if (contract == null) {
       connectContract();
     }
   }, [contract]);
@@ -61,11 +65,7 @@ export default function page() {
     }
   }
 
-
-
-  const currentCommunity = useSelector(
-    (state) => state.persistedAuthReducer.value.currentCommunityScanning
-  );
+  const currentCommunity = searchparams.get("title");
 
   const [currentComm, setCurrentComm] = useState(currentCommunity);
 
@@ -74,32 +74,53 @@ export default function page() {
     e.preventDefault();
     setFile(e.target.files[0]);
   };
-  const handlePublish = async(e) => {
+
+  //! exclusive handler
+  const handlePublishExclusive = async (e) => {
     e.preventDefault();
     const cid = await client.put([file]);
     console.log("uploaded file :" + cid);
-    const res = await contract.submitArtForPublication(communityAddress, document.getElementById("text").value, document.getElementById("message").value, cid);
+    const res = await contract.submitArtForPublication(
+      communityAddress,
+      document.getElementById("text").value,
+      document.getElementById("message").value,
+      cid
+    );
     setOpen(false);
+  };
+
+  //! general handler
+  const handlePublishGeneral = async (e) => {
+    e.preventDefault();
+    const cid = await client.put([file]);
+    console.log("uploaded file :" + cid);
+    const res = await contract.submitArtForPublication(
+      communityAddress,
+      document.getElementById("text").value,
+      document.getElementById("message").value,
+      cid
+    );
+    setOpen2(false);
   };
 
   const showFileFromIpfs = async (cid) => {
     const data = await client.get(cid);
     const file = data.files();
-  }
+  };
 
-  if(!contract){
+  if (!contract) {
     return <div>loading...</div>;
   }
 
   async function buyNativeToken() {
-    const res = await contract.purchaseNativeToken(communityAddress.random, );
+    const res = await contract.purchaseNativeToken(communityAddress.random);
   }
 
   return (
     <section class="text-gray-600 body-font">
       <Header />
-      <BuyCommunityToken contract={contract}/>
-      <PendingPublication contract={contract}/>
+      <BuyCommunityToken contract={contract} />
+      <PendingPublication contract={contract} />
       <Modal
         open={open}
         onClose={handleClose}
@@ -107,11 +128,11 @@ export default function page() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div class=" bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
+          <div class=" bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-2 md:mt-0 relative z-10 shadow-md">
             <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">
-              Upload a file to publish
+              Upload an Exclusive file to publish
             </h2>
-            <div class="relative mb-4">
+            <div class="relative">
               <label for="text" class="leading-7 text-sm text-gray-600">
                 Title
               </label>
@@ -122,7 +143,51 @@ export default function page() {
                 class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
-            <div class="relative mb-4">
+            <div class="relative">
+              <label for="text" class="leading-7 text-sm text-gray-600">
+                Starting Price
+              </label>
+              <input
+                type="number"
+                id="number2"
+                name="number2"
+                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div class="relative">
+              <label for="text" class="leading-7 text-sm text-gray-600">
+                Decremental Price
+              </label>
+              <input
+                type="number"
+                id="number3"
+                name="number3"
+                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div class="relative">
+              <label for="text" class="leading-7 text-sm text-gray-600">
+                Time Interval
+              </label>
+              <input
+                type="number"
+                id="number4"
+                name="number4"
+                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div class="relative">
+              <label for="text" class="leading-7 text-sm text-gray-600">
+                Minimum Price
+              </label>
+              <input
+                type="number"
+                id="number5"
+                name="number5"
+                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div class="relative">
               <label for="message" class="leading-7 text-sm text-gray-600">
                 Description (up to 20 words)
               </label>
@@ -132,14 +197,16 @@ export default function page() {
                 class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
               ></textarea>
             </div>
-            <div class="relative mb-4">
+            <div class="relative">
               <label for="text" class="leading-7 text-sm text-gray-600">
                 Upload a File
               </label>
               <input type="file" onChange={onFileChange} />
             </div>
-            <button onClick={handlePublish}
-            class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            <button
+              onClick={handlePublishExclusive}
+              class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            >
               Publish
             </button>
             <p className="text-sm p-2 m-2">
@@ -163,7 +230,17 @@ export default function page() {
               <span className="text-black">
                 <AddIcon />
               </span>
-              publish an Art
+              publish an Exclusive Art
+            </button>
+
+            <button
+              onClick={handleOpen2}
+              className="mr-5 p-2 mt-6 ring-1 border"
+            >
+              <span className="text-black">
+                <AddIcon />
+              </span>
+              publish a General Art
             </button>
           </div>
         </div>
@@ -173,6 +250,57 @@ export default function page() {
           ))}
         </div>
       </div>
+      <Modal
+        open={open2}
+        onClose={handleClose2}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <div class=" bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
+            <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">
+              Upload a general file to publish
+            </h2>
+            <div class="relative">
+              <label for="text" class="leading-7 text-sm text-gray-600">
+                Title
+              </label>
+              <input
+                type="text"
+                id="text"
+                name="text"
+                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div class="relative">
+              <label for="message" class="leading-7 text-sm text-gray-600">
+                Description (up to 20 words)
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+              ></textarea>
+            </div>
+            <div class="relative mb-2">
+              <label for="text" class="leading-7 text-sm text-gray-600">
+                Upload a File
+              </label>
+              <input type="file" className="mb-2" onChange={onFileChange} />
+            </div>
+            <button
+              onClick={handlePublishGeneral}
+              class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            >
+              Publish
+            </button>
+            <p className="text-sm p-2 m-2">
+              Current Publication Cost : 3 Community Tokens
+            </p>
+            <p class="text-xs text-gray-500 mt-3"></p>
+          </div>
+        </Box>
+      </Modal>
     </section>
   );
 }

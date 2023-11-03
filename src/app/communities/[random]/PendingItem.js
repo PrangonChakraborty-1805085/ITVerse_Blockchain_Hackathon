@@ -1,13 +1,48 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import Timer from "./Timer";
+
 import { Web3Storage } from "web3.storage";
 import { ethers } from "ethers";
 import * as Contracts from "../../../constant";
 
-export default function PendingItem({art}) {
+export default function PendingItem({ art }) {
+  const [upcount, setUpcount] = useState(0);
+  const [downCount, setDownCount] = useState(0);
+  const handleThumbsUp = (e) => {
+    e.preventDefault();
+    setUpcount(upcount + 1);
+    if (upcount % 2 === 0) {
+      e.target.style.color = "rgba(51, 51, 51,0.9)";
+    } else {
+      e.target.style.color = "rgba(0,0,255,0.9)";
+    }
+  };
+  const handleThumbsDown = (e) => {
+    e.preventDefault();
+    setDownCount(downCount + 1);
+    if (downCount % 2 === 0) {
+      e.target.style.color = "rgba(51, 51, 51,0.9)";
+    } else {
+      e.target.style.color = "rgba(255, 0, 0, 0.9)";
+    }
+  };
+  const handleVoteSubmit = (e) => {
+    e.preventDefault();
+    if (upcount !== 0 || downCount !== 0) {
+      // has submitted either upvote or downvote
+      if (upcount % 2 !== 0) {
+        //upvote pressed ..send request for upvoting
+      } else {
+        //downvote pressed ..send request for downvoting
+      }
+    }
+  };
   let [img, setImg] = React.useState("");
   const token = Contracts.WEB3_TOKEN;
-  const client = new Web3Storage({token: token})
+  const client = new Web3Storage({ token: token });
   React.useEffect(() => {
     client.get(art.ipfsCID).then((value) => {
       value.files().then((files) => {
@@ -20,22 +55,28 @@ export default function PendingItem({art}) {
     });
   }, []);
   return (
-    <div class="xl:w-1/4 md:w-1/2 p-4">
+    <div class="xl:w-1/3 md:w-1/2 p-4 cursor-pointer">
       <div class="bg-gray-100 p-6 rounded-lg">
         <img
           class="h-40 rounded w-full object-cover object-center mb-6"
           src={img}
           alt="content"
         />
-        <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">
-          SUBTITLE
-        </h3>
         <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
           {art.title}
         </h2>
-        <p class="leading-relaxed text-base">
-          {art.description}
-        </p>
+        <p class="leading-relaxed text-base">{art.description}</p>
+        <Timer />
+        <div class="flex flex-row items-center justify-evenly p-4">
+          <ThumbUpIcon onClick={handleThumbsUp} />
+          <ThumbDownIcon onClick={handleThumbsDown} />
+        </div>
+        <button
+          onClick={handleVoteSubmit}
+          className="p-2 bg-indigo-500 border text-white w-full"
+        >
+          Vote
+        </button>
       </div>
     </div>
   );
