@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from 'next/navigation'
-
+import { useRouter } from "next/navigation";
 
 export default function walletConnect() {
   //net data
@@ -11,7 +10,7 @@ export default function walletConnect() {
   const [email, setEmail] = useState("");
 
   // routing
-  const router=useRouter();
+  const router = useRouter();
 
   const handleConnectToMetamask = async (e) => {
     e.preventDefault();
@@ -34,7 +33,7 @@ export default function walletConnect() {
             method: "eth_requestAccounts",
           });
           console.log("account found ", accounts[0]);
-          console.log("current account is : ",accounts[0]);
+          console.log("current account is : ", accounts[0]);
           //storing the account in session storage
           //pushing to new page
           router.push("/dashboard");
@@ -54,7 +53,8 @@ export default function walletConnect() {
               ArtFlair - The Future of Art Gallery
             </h1>
             <p className="leading-relaxed text-xl mt-4">
-              Where Art Meets Blockchain. Buy, Sell and Collect Digital Art With Ease and Security.
+              Where Art Meets Blockchain. Buy, Sell and Collect Digital Art With
+              Ease and Security.
             </p>
           </div>
           <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
@@ -62,7 +62,10 @@ export default function walletConnect() {
               Connect to Metamask
             </h2>
             <div className="relative mb-4">
-              <label htmlFor="full-name" className="leading-7 text-sm text-gray-600">
+              <label
+                htmlFor="full-name"
+                className="leading-7 text-sm text-gray-600"
+              >
                 Full Name
               </label>
               <input
@@ -75,7 +78,10 @@ export default function walletConnect() {
               />
             </div>
             <div className="relative mb-4">
-              <label htmlFor="email" className="leading-7 text-sm text-gray-600">
+              <label
+                htmlFor="email"
+                className="leading-7 text-sm text-gray-600"
+              >
                 Email
               </label>
               <input
@@ -103,4 +109,3 @@ export default function walletConnect() {
     </div>
   );
 }
-

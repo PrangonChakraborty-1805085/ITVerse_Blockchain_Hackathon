@@ -5,9 +5,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import NFT_Item from "./NFT_Item";
-import AddIcon from "@mui/icons-material/Add";
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -19,14 +16,13 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-export default function page() {
-  const number = [1, 3, 4, 5, 6];
+
+export default function NFT_Item() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <section class="text-gray-600 body-font">
-      <Header />
+    <div class="xl:w-1/4 md:w-1/2 p-4">
       <Modal
         open={open}
         onClose={handleClose}
@@ -62,34 +58,27 @@ export default function page() {
             <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
               Create
             </button>
-            <p className="text-sm p-2 m-2">
-              Current Community Creation Cost : 5 ABX Tokens
-            </p>
             <p class="text-xs text-gray-500 mt-3"></p>
           </div>
         </Box>
       </Modal>
-      <div class="container px-5 py-24 mx-auto">
-        <div class="flex flex-wrap w-full mb-20">
-          <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
-            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
-              Notable Collections
-            </h1>
-            <div class="h-1 w-20 bg-indigo-500 rounded"></div>
-            <button onClick={handleOpen} className="mr-5 p-2 mt-6 ring-1 border">
-              <span className="text-black">
-                <AddIcon />
-              </span>
-              publish an Art
-            </button>
-          </div>
-        </div>
-        <div class="flex flex-wrap -m-4">
-          {number.map((num) => (
-            <NFT_Item key={num} />
-          ))}
-        </div>
+      <div class="bg-gray-100 p-6 rounded-lg">
+        <img
+          class="h-40 rounded w-full object-cover object-center mb-6"
+          src="https://dummyimage.com/720x400"
+          alt="content"
+        />
+        <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">
+          SUBTITLE
+        </h3>
+        <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
+          Chichen Itza
+        </h2>
+        <p class="leading-relaxed text-base">
+          Fingerstache flexitarian street art 8-bit waistcoat. Distillery
+          hexagon disrupt edison bulbche.
+        </p>
       </div>
-    </section>
+    </div>
   );
 }

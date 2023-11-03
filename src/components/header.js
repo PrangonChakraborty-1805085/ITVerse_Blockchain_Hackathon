@@ -6,6 +6,7 @@ import styled from "@emotion/styled";
 import * as Contracts from "../constant";
 import { ethers } from "ethers";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
 import {
   setAbxPurchaseRate,
   setAbxBalance,
@@ -14,6 +15,7 @@ import {
 export default function Header() {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleClose = async () => {
     setOpen(false);
@@ -49,7 +51,7 @@ export default function Header() {
         );
         console.log(Contract);
         settContract(Contract);
-        dispatch(setContract(Contract));
+        // dispatch(setContract(Contract));
         Contract.ABX_Price().then((value) => {
           setEthxValue(parseInt(value._hex) / 1000000000000000000);
           dispatch(
@@ -89,7 +91,7 @@ export default function Header() {
   return (
     <header className="text-gray-600 body-font shadow-md">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-        <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <a onClick={(e)=>{router.push('/')}} className="cursor-pointer flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
