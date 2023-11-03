@@ -1,8 +1,10 @@
+import Header from "../../../components/header";
 import React from "react";
 
 export default function page() {
   return (
     <section class="text-gray-600 body-font">
+      <Header />
       <Modal
         open={open}
         onClose={handleClose}

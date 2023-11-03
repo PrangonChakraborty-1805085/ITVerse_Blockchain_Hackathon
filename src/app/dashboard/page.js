@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import Header from "../../components/header";
 
 const style = {
   position: "absolute",
@@ -27,6 +28,7 @@ export default function page() {
   const number = [1, 3, 4, 5, 6];
   return (
     <section class="text-gray-600 body-font">
+      <Header />
       <Modal
         open={open}
         onClose={handleClose}
