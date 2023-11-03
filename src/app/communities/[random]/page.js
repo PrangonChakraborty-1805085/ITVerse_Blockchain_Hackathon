@@ -10,7 +10,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { ethers } from "ethers";
 import * as Contracts from "../../../constant";
 import { Web3Storage } from "web3.storage";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 import { useSelector } from "react-redux";
 import PendingPublication from "./PendingPublication";
@@ -38,7 +38,8 @@ export default function page() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   let [contract, setContract] = useState(null);
-  let communityAddress = useParams();
+  const searchparams = useSearchParams();
+  let communityAddress = searchparams.get("address");
 
   useEffect(() => {
     if(contract == null){
@@ -77,7 +78,7 @@ export default function page() {
     e.preventDefault();
     const cid = await client.put([file]);
     console.log("uploaded file :" + cid);
-    contract.submitArtForPublication(communityAddress.random, document.getElementById("text").value, document.getElementById("message").value, cid);
+    contract.submitArtForPublication(communityAddress, document.getElementById("text").value, document.getElementById("message").value, cid);
   };
 
   const showFileFromIpfs = async (cid) => {
@@ -96,7 +97,7 @@ export default function page() {
   return (
     <section class="text-gray-600 body-font">
       <Header />
-      <BuyCommunityToken />
+      <BuyCommunityToken contract={contract}/>
       <PendingPublication />
       <Modal
         open={open}

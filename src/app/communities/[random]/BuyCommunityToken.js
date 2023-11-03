@@ -1,8 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Modal, Typography } from "@mui/material";
 
 import { useSelector } from "react-redux";
+import { ethers } from "ethers";
+import { useSearchParams } from "next/navigation";
 const style = {
   position: "absolute",
   top: "50%",
@@ -14,18 +16,51 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-export default function BuyCommunityToken() {
+export default function BuyCommunityToken({contract}) {
   const [open, setOpen] = useState(false);
   const [tokenAmount, setTokenAmount] = useState(0);
   const [totalABXNeeded, setTotalABXNeeded] = useState(0);
   const [abxValue, setAbxValue] = useState(3);
   const [tokenBal, setTokenBal] = React.useState(0);
+  const searchparams = useSearchParams();
+  let communityAddress = searchparams.get("address");
+  const [community, setCommunity] = useState(null);
+
+
+  useEffect(() => {
+    contract.findCommunity(communityAddress).then((value) => {
+      setCommunity(value);
+      setAbxValue(parseInt(value.exchangerate._hex) / 1000000000000000000);
+    });
+  },[]);
+
   const handleClose = async () => {
     setOpen(false);
   };
   const currentCommunity = useSelector(
     (state) => state.persistedAuthReducer.value.currentCommunityScanning
   );
+
+  function connectContract() {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        ethereum
+          .request({
+            method: "eth_requestAccounts",
+          })
+          .then((accounts) => {
+            contract.getBalanceNativeToken( communityAddress ,accounts[0]).then((value) => {
+              setTokenBal(parseInt(value._hex) / 1000000000000000000);
+            });
+          });
+      } else {
+        console.log("ethereum object does not exist");
+      }
+    } catch (error) {
+      console.log("Error happened ", error);
+    }
+  }
 
 //   const [currentComm, setCurrentComm] = useState(currentCommunity);
 
@@ -34,6 +69,7 @@ export default function BuyCommunityToken() {
     // const transaction = await contract.buyABX({
     //   value: ethers.utils.parseEther(ether.toString()),
     // });
+    const res = await contract.purchaseNativeTokens(communityAddress,tokenAmount);
     setOpen(false);
   };
   return (
