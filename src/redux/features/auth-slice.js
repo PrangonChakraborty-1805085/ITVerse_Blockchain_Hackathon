@@ -18,7 +18,7 @@ export const auth = createSlice({
     signIn: (state, action) => {
       return {
         value: {
-          // ...state.value,
+          ...state.value,
           user: action.payload,
         },
       };
@@ -26,7 +26,7 @@ export const auth = createSlice({
     signOut: (state, action) => {
       return {
         value: {
-          // ...state.value,
+          ...state.value,
           user: "",
         },
       };
@@ -34,7 +34,7 @@ export const auth = createSlice({
     setAbxPurchaseRate: (state, action) => {
       return {
         value: {
-          // ...state.value,
+          ...state.value,
           abxPurchaseRate: action.payload,
         },
       };
@@ -49,6 +49,7 @@ export const auth = createSlice({
     setContract: (state, action) => {
       return {
         value: {
+          ...state.value,
           contract: action.payload,
         },
       };

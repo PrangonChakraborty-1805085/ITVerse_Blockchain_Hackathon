@@ -1,4 +1,4 @@
-export const contractAddress = "0xC4020dF8bcBc8b58Faad81b38d37bf7152CB1c82";
+export const contractAddress = "0xe7555Cb9ebE9d3c1BaA2F7e9d32fE8D90A4D2113";
 export const abi = [
 	{
 		"inputs": [
@@ -42,6 +42,21 @@ export const abi = [
 				"internalType": "string",
 				"name": "_description",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_exchangeRate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_stakeAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_requirement",
+				"type": "uint256"
 			}
 		],
 		"name": "createCommunity",
@@ -287,6 +302,34 @@ export const abi = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "transferNativeToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "ABX_Price",
 		"outputs": [
@@ -376,6 +419,16 @@ export const abi = [
 				"internalType": "uint256",
 				"name": "exchangeRate",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "stakeAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "membershipRequirement",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -433,6 +486,56 @@ export const abi = [
 	},
 	{
 		"inputs": [],
+		"name": "getCommunities",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "nativeToken",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "exchangeRate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "stakeAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "membershipRequirement",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct ABXToken.Community[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "name",
 		"outputs": [
 			{
@@ -471,4 +574,3 @@ export const abi = [
 		"type": "function"
 	}
 ]
-
