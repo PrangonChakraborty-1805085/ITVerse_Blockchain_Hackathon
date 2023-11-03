@@ -1,6 +1,6 @@
 "use client";
 import Header from "../../../components/header";
-import React, { use, useState, useEffect } from "react";
+import React, {  useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
