@@ -1,4 +1,4 @@
-export function NFT() {
+export default function NFT() {
     return (
         < section class="text-gray-600 body-font overflow-hidden" >
             <div class="container px-5 py-24 mx-auto">
@@ -52,7 +52,7 @@ export function NFT() {
                                 <button class="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>
                                 <button class="border-2 border-gray-300 ml-1 bg-indigo-500 rounded-full w-6 h-6 focus:outline-none"></button>
                             </div>
-                            <div class="flex ml-6 items-center">
+                            {/* <div class="flex ml-6 items-center">
                                 <span class="mr-3">Size</span>
                                 <div class="relative">
                                     <select class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
@@ -67,7 +67,7 @@ export function NFT() {
                                         </svg>
                                     </span>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div class="flex">
                             <span class="title-font font-medium text-2xl text-gray-900">$58.00</span>

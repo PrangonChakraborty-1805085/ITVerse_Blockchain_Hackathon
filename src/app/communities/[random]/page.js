@@ -36,7 +36,7 @@ export default function page() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   let [contract, setContract] = useState(null);
-  let contractAddress = useParams();
+  let communityAddress = useParams();
 
   useEffect(() => {
     if(contract == null){
@@ -59,6 +59,7 @@ export default function page() {
   }
 
 
+
   const currentCommunity = useSelector(
     (state) => state.persistedAuthReducer.value.currentCommunityScanning
   );
@@ -74,7 +75,7 @@ export default function page() {
     e.preventDefault();
     const cid = await client.put([file]);
     console.log("uploaded file :" + cid);
-    contract.submitArtForPublication(contractAddress.random, document.getElementById("text").value, document.getElementById("message").value, cid);
+    contract.submitArtForPublication(communityAddress.random, document.getElementById("text").value, document.getElementById("message").value, cid);
   };
 
   const showFileFromIpfs = async (cid) => {
@@ -84,6 +85,10 @@ export default function page() {
 
   if(!contract){
     return <div>loading...</div>;
+  }
+
+  async function buyNativeToken() {
+    const res = await contract.purchaseNativeToken(communityAddress.random, );
   }
 
   return (
