@@ -167,7 +167,7 @@ export default function page() {
             </div>
             <div class="relative">
               <label for="text" class="leading-7 text-sm text-gray-600">
-                Time Interval
+                Time Interval (in seconds)
               </label>
               <input
                 type="number"
