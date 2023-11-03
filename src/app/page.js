@@ -1,12 +1,11 @@
-"use client";
-import { useSelector } from "react-redux";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import WalletConnect from "../components/walletConnect";
 import Header from "../components/header";
-export default function Home() {
+
+export default function Wallet() {
   return (
     <div>
       <Header />
+      <WalletConnect />
     </div>
   );
 }

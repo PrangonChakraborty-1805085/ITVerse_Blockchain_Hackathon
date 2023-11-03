@@ -7,6 +7,7 @@ const initialState = {
     user: "",
     abxPurchaseRate: 0,
     abxBalance: 0,
+    contract: null,
   },
 };
 
@@ -41,8 +42,14 @@ export const auth = createSlice({
     setAbxBalance: (state, action) => {
       return {
         value: {
-          // ...state.value,
           abxBalance: action.payload,
+        },
+      };
+    },
+    setContract: (state, action) => {
+      return {
+        value: {
+          contract: action.payload,
         },
       };
     },
@@ -58,7 +65,12 @@ export const auth = createSlice({
   },
 });
 
-export const { signIn, signOut, setAbxPurchaseRate, setAbxBalance } =
-  auth.actions;
+export const {
+  signIn,
+  signOut,
+  setAbxPurchaseRate,
+  setAbxBalance,
+  setContract,
+} = auth.actions;
 
 export default auth.reducer;

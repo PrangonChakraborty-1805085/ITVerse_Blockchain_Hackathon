@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import {
   setAbxPurchaseRate,
   setAbxBalance,
+  setContract,
 } from "../redux/features/auth-slice";
 export default function Header() {
   const [open, setOpen] = React.useState(false);
@@ -19,7 +20,7 @@ export default function Header() {
   };
   let [abx, setAbx] = React.useState(0);
   let [ether, setEther] = React.useState(0);
-  let [contract, setContract] = React.useState(null);
+  let [contract, settContract] = React.useState(null);
   let [ethxValue, setEthxValue] = React.useState(0);
   let [abxBal, setAbxBal] = React.useState(0);
 
@@ -47,7 +48,8 @@ export default function Header() {
           signer
         );
         console.log(Contract);
-        setContract(Contract);
+        settContract(Contract);
+        dispatch(setContract(Contract));
         Contract.ABX_Price().then((value) => {
           setEthxValue(parseInt(value._hex) / 1000000000000000000);
           dispatch(
@@ -104,11 +106,12 @@ export default function Header() {
         </a>
         <nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
           <BasicMenu name={"community"} />
-          <BasicMenu name={"Second Link"} />
-          <BasicMenu name={"Third Link"} />
+          {/* <BasicMenu name={"Second Link"} /> */}
+          {/* <BasicMenu name={"Third Link"} /> */}
         </nav>
         {/* <div>{abxBal}</div> */}
         {/* <div>{ethxValue}</div> */}
+        <h2 className="font-bold mr-5">Balance: {abxBal} ABX Tokens</h2>
         <button
           onClick={() => setOpen(true)}
           className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
