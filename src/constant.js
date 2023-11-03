@@ -1,4 +1,4 @@
-export const contractAddress = "0xe7555Cb9ebE9d3c1BaA2F7e9d32fE8D90A4D2113";
+export const contractAddress = "0xb9a40Cc524C8B57015bFb1C85F775dfc629eb96B";
 export const abi = [
 	{
 		"inputs": [
@@ -60,6 +60,24 @@ export const abi = [
 			}
 		],
 		"name": "createCommunity",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_creator",
+				"type": "address"
+			}
+		],
+		"name": "downvoteArtProduct",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -156,6 +174,102 @@ export const abi = [
 		"type": "error"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
+			}
+		],
+		"name": "getArtSubmissionsProcessed",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "community",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "ipfsCID",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "stakedAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votingDeadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "stakeAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isApproved",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isProcessed",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votesFor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votesAgainst",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "voters",
+						"type": "address[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "isOwner",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct ArtProductContract.ArtSubmission[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ReentrancyGuardReentrantCall",
+		"type": "error"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -188,12 +302,58 @@ export const abi = [
 				"type": "address"
 			},
 			{
+				"internalType": "address",
+				"name": "_creator",
+				"type": "address"
+			}
+		],
+		"name": "processArtSubmission",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
+			},
+			{
 				"internalType": "uint256",
 				"name": "_nativeTokensToReceive",
 				"type": "uint256"
 			}
 		],
 		"name": "purchaseNativeTokens",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_title",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_description",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_ipfsCID",
+				"type": "string"
+			}
+		],
+		"name": "submitArtForPublication",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -330,6 +490,24 @@ export const abi = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_creator",
+				"type": "address"
+			}
+		],
+		"name": "upvoteArtProduct",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "ABX_Price",
 		"outputs": [
@@ -361,6 +539,85 @@ export const abi = [
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "artSubmissions",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "community",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "creator",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "title",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "ipfsCID",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "stakedAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "votingDeadline",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "stakeAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isApproved",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isProcessed",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "votesFor",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "votesAgainst",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isOwner",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -429,6 +686,11 @@ export const abi = [
 				"internalType": "uint256",
 				"name": "membershipRequirement",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "votingDuration",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -455,6 +717,97 @@ export const abi = [
 				"internalType": "uint8",
 				"name": "",
 				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
+			}
+		],
+		"name": "getArtSubmissionsPending",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "community",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "ipfsCID",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "stakedAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votingDeadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "stakeAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isApproved",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isProcessed",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votesFor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votesAgainst",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "voters",
+						"type": "address[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "isOwner",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct ArtProductContract.ArtSubmission[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -524,6 +877,11 @@ export const abi = [
 						"internalType": "uint256",
 						"name": "membershipRequirement",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votingDuration",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct ABXToken.Community[]",
@@ -574,3 +932,4 @@ export const abi = [
 		"type": "function"
 	}
 ]
+

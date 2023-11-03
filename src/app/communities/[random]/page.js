@@ -1,12 +1,16 @@
 "use client";
 import Header from "../../../components/header";
-import React, { useState } from "react";
+import React, { use, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import NFT_Item from "./NFT_Item";
 import AddIcon from "@mui/icons-material/Add";
+import { ethers } from "ethers";
+import * as Contracts from "../../../constant";
+import { Web3Storage } from "web3.storage";
+import { useParams } from "next/navigation";
 
 const style = {
   position: "absolute",
@@ -19,20 +23,60 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
+
+
 export default function page() {
+  const API_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY1NDExMURFMTY3OUFhN0M5YmQxMkIyNzg2MDFlYTA5OTJBNGFFZDEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTg5NTU4MDc2MjEsIm5hbWUiOiJwZGYtdGVzdCJ9.7_9LB5P7f04RVufQ55ZWhOBZCufbXJr6xB_P0zDzMDY";
+  const client = new Web3Storage({ token: API_TOKEN })
   const number = [1, 3, 4, 5, 6];
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  let [contract, setContract] = useState(null);
+  let contractAddress = useParams();
+
+  useEffect(() => {
+    if(contract == null){
+      connectContract();
+    }
+  }, [contract]);
+
+  function connectContract() {
+    const { ethereum } = window;
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      let Contract = new ethers.Contract(
+        Contracts.contractAddress,
+        Contracts.abi,
+        signer
+      );
+      setContract(Contract);
+    }
+  }
+
 
   const [file, setFile] = useState(null);
   const onFileChange = (e) => {
     e.preventDefault();
     setFile(e.target.files[0]);
   };
-  const onFileUpload = (e) => {
+  const handlePublish = async(e) => {
     e.preventDefault();
+    const cid = await client.put([file]);
+    console.log("uploaded file :" + cid);
+    contract.submitArtForPublication(contractAddress.random, document.getElementById("text").value, document.getElementById("message").value, cid);
   };
+
+  const showFileFromIpfs = async (cid) => {
+    const data = await client.get(cid);
+    const file = data.files();
+  }
+
+  if(!contract){
+    return <div>loading...</div>;
+  }
 
   return (
     <section class="text-gray-600 body-font">
@@ -75,11 +119,12 @@ export default function page() {
               </label>
               <input type="file" onChange={onFileChange} />
             </div>
-            <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            <button onClick={handlePublish}
+            class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
               Publish
             </button>
             <p className="text-sm p-2 m-2">
-              Current Community Creation Cost : 3 Community Tokens
+              Current Publication Cost : 3 Community Tokens
             </p>
             <p class="text-xs text-gray-500 mt-3"></p>
           </div>
