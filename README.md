@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+<h2 align="center">ArtFlair</h3>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#frontend">Frontend</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#ontributors">Contributors</a>
+    </li>
+  </ol>
+</details>
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+<!-- ABOUT THE PROJECT -->
+## About the Project
+This is an Art Auctionary Website, developed for Cefalo Presents "ITVerse HackTheVerse" Hackathon in 2023 
 
-To learn more about Next.js, take a look at the following resources:
+### Frontend and Backend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This whole website is built with the following libraries:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. For Frontend and Backend
+   - Nextjs
+2. For CSS
+   - Tailwind CSS
+3. Smart Contracts
+   - Remix IDE 
 
-## Deploy on Vercel
+### Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Will be deployed in Vercel.org
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+<!-- CONTACT -->
+## Contributors
+
+- **Fazle Alahi Mukim**
+- **Prangon Chakraborty**
+- **MD Farhan Mahtab**
+
+
+
