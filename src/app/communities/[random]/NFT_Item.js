@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-export default function NFT_Item({ art }) {
+export default function NFT_Item({ art, owner }) {
   const params = useSearchParams();
   const router = useRouter();
   const handleBuy = (e) => {

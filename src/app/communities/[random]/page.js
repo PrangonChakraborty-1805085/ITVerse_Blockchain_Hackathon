@@ -283,6 +283,7 @@ export default function page() {
             <NFT_Item key={num} />
           ))}
         </div>
+        <NFT_Item/>
       </div>
       <Modal
         open={open2}
