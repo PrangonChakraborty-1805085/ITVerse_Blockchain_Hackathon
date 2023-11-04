@@ -11,10 +11,8 @@ import * as Contracts from "../../../constant";
 import { Web3Storage } from "web3.storage";
 import { useSearchParams } from "next/navigation";
 
-
 import PendingPublication from "./PendingPublication";
 import BuyCommunityToken from "./BuyCommunityToken";
-
 
 const style = {
   position: "absolute",
@@ -92,7 +90,6 @@ export default function page() {
     contract.update(communityAddress).then((value) => {
       console.log("Updated nft list");
     });
-
   }
 
   // Start the timer and provide the function to call when the timer expires
@@ -141,7 +138,7 @@ export default function page() {
       document.getElementById("number6").value,
       0,
       0,
-      0,
+      0
     );
     setopen2(false);
   };
@@ -151,9 +148,13 @@ export default function page() {
   }
 
   contract.getArtSubmissionsProcessed(communityAddress).then((value) => {
-    sellableItems = value;
+    value.forEach((element) => {
+      if (element.ipfsCID !== "") {
+        sellableItems.push(element);
+      }
+    });
+    console.log("sellable items are ", sellableItems);
   });
-
 
   async function buyNativeToken() {
     const res = await contract.purchaseNativeToken(communityAddress.random);
@@ -263,7 +264,7 @@ export default function page() {
         <div class="flex flex-wrap w-full mb-20">
           <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
             <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
-              Notable Collections of {currentComm}
+              Notable Collections of {currentComm} Community
             </h1>
             <div class="h-1 w-20 bg-indigo-500 rounded"></div>
             <button
@@ -288,10 +289,16 @@ export default function page() {
           </div>
         </div>
         <div class="flex flex-wrap -m-4">
-          {sellableItems.map((art,num) => (
-            <NFT_Item key={num} art={art} contract={contract} communityAddress={communityAddress}/>
+          {sellableItems?.map((art, num) => (
+            <NFT_Item
+              key={num}
+              art={art}
+              contract={contract}
+              communityAddress={communityAddress}
+            />
           ))}
         </div>
+        {/* <NFT_Item /> */}
       </div>
       <Modal
         open={open2}

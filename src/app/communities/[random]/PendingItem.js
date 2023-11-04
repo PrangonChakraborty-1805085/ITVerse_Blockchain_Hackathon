@@ -82,7 +82,7 @@ export default function PendingItem({ contract, art }) {
           {art.title}
         </h2>
         <p class="leading-relaxed text-base">{art.description}</p>
-        <Timer />
+        {/* <Timer time={100} /> */}
         <div class="flex flex-row items-center justify-evenly p-4">
           <ThumbUpIcon onClick={handleThumbsUp} />
           <ThumbDownIcon onClick={handleThumbsDown} />

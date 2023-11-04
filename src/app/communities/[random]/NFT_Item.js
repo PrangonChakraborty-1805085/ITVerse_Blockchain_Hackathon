@@ -9,6 +9,9 @@ export default function NFT_Item({ art }) {
     e.preventDefault();
     router.push(`${params.get("address")}/${art.ipfsCID}`);
   };
+  if(!art){
+    return <div>Loading...</div>;
+  }
   return (
     <div class="xl:w-1/3 md:w-1/2 p-4">
       <div class="bg-gray-100 p-6 rounded-lg">
@@ -27,12 +30,22 @@ export default function NFT_Item({ art }) {
           Fingerstache flexitarian street art 8-bit waistcoat. Distillery
           hexagon disrupt edison bulbche.
         </p>
-        <button
-          onClick={handleBuy}
-          className="tracking-widest text-indigo-500 text-xl font-medium title-font"
-        >
-          Buy
-        </button>
+        {!art.isOwner && (
+          <button
+            onClick={handleBuy}
+            className="tracking-widest text-indigo-500 text-xl font-medium title-font"
+          >
+            Buy
+          </button>
+        )}
+        {art.isOwner && (
+          <button
+            onClick={handleUpdatePrice}
+            className="tracking-widest text-indigo-500 text-xl font-medium title-font"
+          >
+            Resell
+          </button>
+        )}
       </div>
     </div>
   );

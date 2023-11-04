@@ -147,7 +147,7 @@ export default function page() {
               </div>
               <div class="relative mb-2">
                 <label for="stkamnt" class="leading-7 text-sm text-gray-600">
-                  Stack Amount (NToken)
+                  Stake Amount (NToken)
                 </label>
                 <input
                   type="number"
