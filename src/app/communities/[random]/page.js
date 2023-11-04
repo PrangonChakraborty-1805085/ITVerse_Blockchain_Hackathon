@@ -93,7 +93,7 @@ export default function page() {
   }
 
   // Start the timer and provide the function to call when the timer expires
-  startTimerAndExecuteFunction(myFunction);
+  //startTimerAndExecuteFunction(myFunction);
 
   const currentCommunity = searchparams.get("title");
 
