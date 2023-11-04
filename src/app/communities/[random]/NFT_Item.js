@@ -7,7 +7,7 @@ export default function NFT_Item({ art }) {
   const router = useRouter();
   const handleBuy = (e) => {
     e.preventDefault();
-    router.push("random/random");
+    router.push(`${params.get("address")}/${art.ipfsCID}`);
   };
   return (
     <div class="xl:w-1/3 md:w-1/2 p-4">

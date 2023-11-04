@@ -1,5 +1,5 @@
 export const WEB3_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY1NDExMURFMTY3OUFhN0M5YmQxMkIyNzg2MDFlYTA5OTJBNGFFZDEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTg5NTU4MDc2MjEsIm5hbWUiOiJwZGYtdGVzdCJ9.7_9LB5P7f04RVufQ55ZWhOBZCufbXJr6xB_P0zDzMDY";
-export const contractAddress = "0x63d45213f375BAA53a916c647c39CD73bDB0263d";
+export const contractAddress = "0x35F2F5Cb68A33437838A7EF629BD161F430c7Df9";
 export const abi = [
 	{
 		"inputs": [
@@ -26,10 +26,79 @@ export const abi = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_CID",
+				"type": "string"
+			}
+		],
+		"name": "buy",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "buyABX",
 		"outputs": [],
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_title",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_description",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_exchangeRate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_stakeAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_requirement",
+				"type": "uint256"
+			}
+		],
+		"name": "createCommunity",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_creator",
+				"type": "address"
+			}
+		],
+		"name": "downvoteArtProduct",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -156,57 +225,6 @@ export const abi = [
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "_title",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_description",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_exchangeRate",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_stakeAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_requirement",
-				"type": "uint256"
-			}
-		],
-		"name": "createCommunity",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_community",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_creator",
-				"type": "address"
-			}
-		],
-		"name": "downvoteArtProduct",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "_community",
 				"type": "address"
@@ -218,6 +236,19 @@ export const abi = [
 			}
 		],
 		"name": "processArtSubmission",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
+			}
+		],
+		"name": "processSubmissions",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -430,6 +461,26 @@ export const abi = [
 				"internalType": "address",
 				"name": "_community",
 				"type": "address"
+			}
+		],
+		"name": "update",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "updateAuctionPrice",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
 			},
 			{
 				"internalType": "address",
@@ -548,6 +599,43 @@ export const abi = [
 				"internalType": "bool",
 				"name": "isOwner",
 				"type": "bool"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isExclusive",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "startingPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "decrement",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "time",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "startTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct ArtProductContract.Auction",
+				"name": "auction",
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
@@ -772,6 +860,43 @@ export const abi = [
 						"internalType": "bool",
 						"name": "isOwner",
 						"type": "bool"
+					},
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "isExclusive",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startingPrice",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "decrement",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "time",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ArtProductContract.Auction",
+						"name": "auction",
+						"type": "tuple"
 					}
 				],
 				"internalType": "struct ArtProductContract.ArtSubmission[]",
@@ -858,6 +983,43 @@ export const abi = [
 						"internalType": "bool",
 						"name": "isOwner",
 						"type": "bool"
+					},
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "isExclusive",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startingPrice",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "decrement",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "time",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ArtProductContract.Auction",
+						"name": "auction",
+						"type": "tuple"
 					}
 				],
 				"internalType": "struct ArtProductContract.ArtSubmission[]",
@@ -987,6 +1149,7 @@ export const abi = [
 		"type": "function"
 	}
 ]
+
 
 
 
