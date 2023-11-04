@@ -23,6 +23,12 @@ export default function PendingPublication({ contract }) {
     contract
       .getArtSubmissionsPending(address)
       .then((value) => {
+        value.forEach((val) => {
+          if (val.ipfsCID === "") {
+            value.splice(value.indexOf(val), 1);
+          }
+        });
+        console.log("value in pending publication ", value);
         setArts(value);
       })
       .catch((err) => {
@@ -48,7 +54,7 @@ export default function PendingPublication({ contract }) {
           </div>
         </div>
         <div class="flex flex-wrap -m-4">
-          {arts.map((art, i) => (
+          {arts?.map((art, i) => (
             <PendingItem key={i} art={art} contract={contract} />
           ))}
         </div>

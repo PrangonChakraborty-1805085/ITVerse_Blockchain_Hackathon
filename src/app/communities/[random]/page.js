@@ -289,17 +289,16 @@ export default function page() {
           </div>
         </div>
         <div class="flex flex-wrap -m-4">
-          {sellableItems.length > 0 &&
-            sellableItems.map((art, num) => (
-              <NFT_Item
-                key={num}
-                art={art}
-                contract={contract}
-                communityAddress={communityAddress}
-              />
-            ))}
+          {sellableItems?.map((art, num) => (
+            <NFT_Item
+              key={num}
+              art={art}
+              contract={contract}
+              communityAddress={communityAddress}
+            />
+          ))}
         </div>
-        <NFT_Item />
+        {/* <NFT_Item /> */}
       </div>
       <Modal
         open={open2}
