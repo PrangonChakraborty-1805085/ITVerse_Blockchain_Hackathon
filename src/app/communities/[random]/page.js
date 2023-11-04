@@ -1,6 +1,6 @@
 "use client";
 import Header from "../../../components/header";
-import React, {  useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -66,6 +66,34 @@ export default function page() {
       setContract(Contract);
     }
   }
+  function startTimerAndExecuteFunction(callback) {
+    const timerDuration = 10000; // 30 seconds in milliseconds
+
+    function timer() {
+      // Start the timer
+      const timerId = setTimeout(() => {
+        // Timer has expired, call the provided callback function
+        callback();
+
+        // Restart the timer
+        timer();
+      }, timerDuration);
+
+      // You can also cancel the timer using clearTimeout(timerId) if needed.
+    }
+
+    // Initial start of the timer
+    timer();
+  }
+
+  // Example usage:
+  function myFunction() {
+    //TODO: here update function will be called
+    // console.log("Timer expired, function called.");
+  }
+
+  // Start the timer and provide the function to call when the timer expires
+  startTimerAndExecuteFunction(myFunction);
 
   const currentCommunity = searchparams.get("title");
 
