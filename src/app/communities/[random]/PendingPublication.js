@@ -44,7 +44,7 @@ export default function PendingPublication({ contract }) {
         <div class="flex flex-wrap w-full mb-20">
           <div class=" w-full mb-6 lg:mb-0">
             <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
-              Pending For Approval
+              Pending Publications for {title}
             </h1>
             <h4 class="text-black p-2">
               Give Upvote or Downvote within deadline
@@ -53,7 +53,7 @@ export default function PendingPublication({ contract }) {
           </div>
         </div>
         <div class="flex flex-wrap -m-4">
-          {arts?.map((art, i) => (
+          {arts.map((art, i) => (
             <PendingItem key={i} art={art} contract={contract} />
           ))}
         </div>
