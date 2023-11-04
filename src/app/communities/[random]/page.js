@@ -48,7 +48,7 @@ export default function page() {
     if (contract == null) {
       connectContract();
     }
-  }, [contract]);
+  }, []);
 
   function connectContract() {
     const { ethereum } = window;
