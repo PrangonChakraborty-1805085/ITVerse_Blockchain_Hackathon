@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useSearchParams,useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function NFT_Item({ art }) {
   const params = useSearchParams();
@@ -29,7 +29,7 @@ export default function NFT_Item({ art }) {
         </p>
         <button
           onClick={handleBuy}
-          className="tracking-widest text-indigo-500 text-xs font-medium title-font text-2xl"
+          className="tracking-widest text-indigo-500 text-xl font-medium title-font"
         >
           Buy
         </button>
