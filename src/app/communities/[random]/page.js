@@ -64,16 +64,13 @@ export default function page() {
     }
   }
   function startTimerAndExecuteFunction(callback) {
-    const timerDuration = 10000; // 30 seconds in milliseconds
+    const timerDuration = 100000; // 100 seconds in milliseconds
 
     function timer() {
       // Start the timer
       const timerId = setTimeout(() => {
         // Timer has expired, call the provided callback function
         callback();
-
-        // Restart the timer
-        timer();
       }, timerDuration);
 
       // You can also cancel the timer using clearTimeout(timerId) if needed.
@@ -93,7 +90,6 @@ export default function page() {
   }
 
   // Start the timer and provide the function to call when the timer expires
-  //startTimerAndExecuteFunction(myFunction);
 
   const currentCommunity = searchparams.get("title");
 
@@ -122,6 +118,8 @@ export default function page() {
       document.getElementById("number5").value
     );
     setOpen(false);
+    //now the update function will be called
+    startTimerAndExecuteFunction(myFunction);
   };
 
   //! general handler
@@ -141,6 +139,8 @@ export default function page() {
       0
     );
     setopen2(false);
+    //now the update function will be called
+    startTimerAndExecuteFunction(myFunction);
   };
 
   if (!contract) {
