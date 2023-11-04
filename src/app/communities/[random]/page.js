@@ -45,6 +45,7 @@ export default function page() {
   let [contract, setContract] = useState(null);
   const searchparams = useSearchParams();
   let communityAddress = searchparams.get("address");
+  let sellableItems = [];
 
   useEffect(() => {
     if (contract == null) {
@@ -106,10 +107,10 @@ export default function page() {
       document.getElementById("message").value,
       cid,
       false,
+      document.getElementById("number6").value,
       0,
       0,
       0,
-      document.getElementById("number6").value
     );
     setopen2(false);
   };
@@ -117,6 +118,11 @@ export default function page() {
   if (!contract) {
     return <div>loading...</div>;
   }
+
+  contract.getArtSubmissionsProcessed(communityAddress).then((value) => {
+    sellableItems = value;
+  });
+
 
   async function buyNativeToken() {
     const res = await contract.purchaseNativeToken(communityAddress.random);
@@ -251,8 +257,8 @@ export default function page() {
           </div>
         </div>
         <div class="flex flex-wrap -m-4">
-          {number.map((num) => (
-            <NFT_Item key={num} />
+          {sellableItems.map((art,num) => (
+            <NFT_Item key={num} art={art}/>
           ))}
         </div>
       </div>
