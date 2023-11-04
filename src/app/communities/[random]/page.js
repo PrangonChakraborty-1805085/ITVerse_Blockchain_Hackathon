@@ -2,20 +2,19 @@
 import Header from "../../../components/header";
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+
 import Modal from "@mui/material/Modal";
 import NFT_Item from "./NFT_Item";
 import AddIcon from "@mui/icons-material/Add";
 import { ethers } from "ethers";
 import * as Contracts from "../../../constant";
 import { Web3Storage } from "web3.storage";
-import { useParams, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
-import { useSelector } from "react-redux";
+
 import PendingPublication from "./PendingPublication";
 import BuyCommunityToken from "./BuyCommunityToken";
-import { deepCopy } from "ethers/lib/utils";
+
 
 const style = {
   position: "absolute",
@@ -90,6 +89,10 @@ export default function page() {
   function myFunction() {
     //TODO: here update function will be called
     // console.log("Timer expired, function called.");
+    contract.update(communityAddress).then((value) => {
+      console.log("Updated nft list");
+    });
+
   }
 
   // Start the timer and provide the function to call when the timer expires
@@ -286,7 +289,7 @@ export default function page() {
         </div>
         <div class="flex flex-wrap -m-4">
           {sellableItems.map((art,num) => (
-            <NFT_Item key={num} art={art}/>
+            <NFT_Item key={num} art={art} contract={contract} communityAddress={communityAddress}/>
           ))}
         </div>
       </div>
