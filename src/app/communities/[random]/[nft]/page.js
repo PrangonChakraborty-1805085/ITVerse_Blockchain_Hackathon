@@ -6,7 +6,7 @@ import { ethers } from "ethers";
 import * as Contracts from "../../../../constant";
 import Header from "../../../../components/header";
 
-export default function NFT({ art }) {
+export default function NFT({ art, contract, communityAddress }) {
   let [img, setImg] = useState("");
   let client = new Web3Storage({ token: Contracts.WEB3_TOKEN });
   if (!art) {
@@ -27,6 +27,17 @@ export default function NFT({ art }) {
     });
   }, [art]);
 
+  async function handleBuy(e) {
+    e.preventDefault();
+    try{
+        const res = await contract.buy(communityAddress, art.ipfsCID);
+    }
+    catch(err){
+        console.log(err);
+        alert(err);
+    }
+  }
+
   return (
     <section class="text-gray-600 body-font overflow-hidden">
       <Header />
@@ -46,7 +57,8 @@ export default function NFT({ art }) {
               <span class="title-font font-medium text-2xl text-gray-900">
                 {art.price} Token
               </span>
-              <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+              <button onClick={handleBuy}
+                class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                 Buy
               </button>
             </div>
