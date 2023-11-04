@@ -23,6 +23,11 @@ export default function PendingPublication({ contract }) {
     contract
       .getArtSubmissionsPending(address)
       .then((value) => {
+        value.forEach(element => {
+          if(element.ipfsCID === ""){
+            value.splice(value.indexOf(element), 1);
+          }
+        });
         setArts(value);
       })
       .catch((err) => {
