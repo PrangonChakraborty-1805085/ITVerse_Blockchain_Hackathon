@@ -9,7 +9,10 @@ export default function NFT_Item({ art }) {
     e.preventDefault();
     router.push(`${params.get("address")}/${art.ipfsCID}`);
   };
-  if(!art){
+  const handleResell = (e) => {
+    e.preventDefault();
+  };
+  if (!art) {
     return <div>Loading...</div>;
   }
   return (
@@ -38,9 +41,9 @@ export default function NFT_Item({ art }) {
             Buy
           </button>
         )}
-        {art.isOwner && (
+        {art.isOwner && art.show && (
           <button
-            onClick={handleUpdatePrice}
+            onClick={handleResell}
             className="tracking-widest text-indigo-500 text-xl font-medium title-font"
           >
             Resell
