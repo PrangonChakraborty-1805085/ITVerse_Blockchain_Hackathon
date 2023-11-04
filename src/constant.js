@@ -1,6 +1,7 @@
 export const WEB3_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY1NDExMURFMTY3OUFhN0M5YmQxMkIyNzg2MDFlYTA5OTJBNGFFZDEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTg5NTU4MDc2MjEsIm5hbWUiOiJwZGYtdGVzdCJ9.7_9LB5P7f04RVufQ55ZWhOBZCufbXJr6xB_P0zDzMDY";
-export const contractAddress = "0x74a85aACaB530661d2d74fa75E2d9b902cB12cc5b04";
-export const abi =[
+export const contractAddress = "0xD27739d0453334DDe9d65999f0B058A3D442a1a0";
+export const abi =
+[
 	{
 		"inputs": [
 			{
@@ -193,134 +194,6 @@ export const abi =[
 		"type": "error"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_community",
-				"type": "address"
-			}
-		],
-		"name": "getArtSubmissionsPending",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "community",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "creator",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "title",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "description",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "ipfsCID",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "votingDeadline",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "stakeAmount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "isApproved",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isProcessed",
-						"type": "bool"
-					},
-					{
-						"internalType": "uint256",
-						"name": "votesFor",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "votesAgainst",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address[]",
-						"name": "voters",
-						"type": "address[]"
-					},
-					{
-						"internalType": "bool",
-						"name": "isOwner",
-						"type": "bool"
-					},
-					{
-						"components": [
-							{
-								"internalType": "bool",
-								"name": "isExclusive",
-								"type": "bool"
-							},
-							{
-								"internalType": "bool",
-								"name": "show",
-								"type": "bool"
-							},
-							{
-								"internalType": "uint256",
-								"name": "startingPrice",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "decrement",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "time",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "startTime",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "price",
-								"type": "uint256"
-							}
-						],
-						"internalType": "struct ArtProductContract.Auction",
-						"name": "auction",
-						"type": "tuple"
-					}
-				],
-				"internalType": "struct ArtProductContract.ArtSubmission[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "ReentrancyGuardReentrantCall",
 		"type": "error"
@@ -349,134 +222,6 @@ export const abi =[
 		],
 		"name": "Approval",
 		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_community",
-				"type": "address"
-			}
-		],
-		"name": "getArtSubmissionsProcessed",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "community",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "creator",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "title",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "description",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "ipfsCID",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "votingDeadline",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "stakeAmount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "isApproved",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isProcessed",
-						"type": "bool"
-					},
-					{
-						"internalType": "uint256",
-						"name": "votesFor",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "votesAgainst",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address[]",
-						"name": "voters",
-						"type": "address[]"
-					},
-					{
-						"internalType": "bool",
-						"name": "isOwner",
-						"type": "bool"
-					},
-					{
-						"components": [
-							{
-								"internalType": "bool",
-								"name": "isExclusive",
-								"type": "bool"
-							},
-							{
-								"internalType": "bool",
-								"name": "show",
-								"type": "bool"
-							},
-							{
-								"internalType": "uint256",
-								"name": "startingPrice",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "decrement",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "time",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "startTime",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "price",
-								"type": "uint256"
-							}
-						],
-						"internalType": "struct ArtProductContract.Auction",
-						"name": "auction",
-						"type": "tuple"
-					}
-				],
-				"internalType": "struct ArtProductContract.ArtSubmission[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	},
 	{
 		"inputs": [
@@ -1056,6 +801,262 @@ export const abi =[
 				"internalType": "address",
 				"name": "_community",
 				"type": "address"
+			}
+		],
+		"name": "getArtSubmissionsPending",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "community",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "ipfsCID",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votingDeadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "stakeAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isApproved",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isProcessed",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votesFor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votesAgainst",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "voters",
+						"type": "address[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "isOwner",
+						"type": "bool"
+					},
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "isExclusive",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "show",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startingPrice",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "decrement",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "time",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ArtProductContract.Auction",
+						"name": "auction",
+						"type": "tuple"
+					}
+				],
+				"internalType": "struct ArtProductContract.ArtSubmission[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
+			}
+		],
+		"name": "getArtSubmissionsProcessed",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "community",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "ipfsCID",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votingDeadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "stakeAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isApproved",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isProcessed",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votesFor",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votesAgainst",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "voters",
+						"type": "address[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "isOwner",
+						"type": "bool"
+					},
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "isExclusive",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "show",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startingPrice",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "decrement",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "time",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ArtProductContract.Auction",
+						"name": "auction",
+						"type": "tuple"
+					}
+				],
+				"internalType": "struct ArtProductContract.ArtSubmission[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_community",
+				"type": "address"
 			},
 			{
 				"internalType": "address",
@@ -1169,6 +1170,13 @@ export const abi =[
 		"type": "function"
 	}
 ]
+
+
+
+
+
+
+
 
 
 
